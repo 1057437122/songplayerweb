@@ -16,3 +16,9 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['namespace'=>'Api','middleware'=>['checktime']],function(){
+	Route::get('/','IndexController@index');
+	Route::get('/ping','IndexController@ping');
+	Route::get('/testxx','IndexController@test_xx');
+});
