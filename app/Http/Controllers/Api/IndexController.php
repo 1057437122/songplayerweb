@@ -10,7 +10,7 @@ class IndexController extends ApiController
 {
 	public function __construct(){
 		parent::__construct();
-		DB::connection()->enableQueryLog();
+		// DB::connection()->enableQueryLog();
         // DB::getQueryLog()
 	}
     //
@@ -39,7 +39,7 @@ class IndexController extends ApiController
     				['create_time','>=',time()-10],
     				['status',0],
     				])->orderBy('id','desc')->first();
-    			mylog(json_encode(DB::getQueryLog()));
+    			// mylog(json_encode(DB::getQueryLog()));
     			if($latest_cmd){
     				//
     				$ret = ['type'=>$latest_cmd->type,'cmd'=>$latest_cmd->cmd];

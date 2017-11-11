@@ -20,8 +20,8 @@
                   <div class="row">
                     <button class="btn btn-default-outline" onclick="player_play(1);"><i class="icon-home"></i>播放</button>
                     <button class="btn btn-default-outline" onclick="player_play(0);"><i class="icon-home"></i>暂停</button>
-                    <button class="btn btn-primary-outline"><i class="icon-user"></i>上一首</button>
-                    <button class="btn btn-success-outline"><i class="icon-cog"></i>下一首</button>
+                    <button class="btn btn-primary-outline" onclick="player_play_ctrl(-1);"><i class="icon-user"></i>上一首</button>
+                    <button class="btn btn-success-outline"onclick="player_play_ctrl(1);"><i class="icon-cog"></i>下一首</button>
                     <button class="btn btn-info-outline"><i class="icon-cloud-download"></i>Download</button>
                     <button class="btn btn-warning-outline"><i class="icon-warning-sign"></i>Warning</button>
                     <button class="btn btn-danger-outline"><i class="icon-trash"></i>Delete</button>
@@ -44,6 +44,14 @@
 $('#player').addClass('current');
 function player_play(status){
 	$.get('/{{ $background }}/player_play?player_code={{ $player->player_code }}&player_status='+status,function(res){
+		if(res == 1)
+			layer.msg('正在执行,请稍侯~');
+		else
+			layer.msg('执行失败,请稍候再试...');
+	})
+}
+function player_play_ctrl(flag){
+	$.get('/{{ $background }}/player_play_ctrl?player_code={{ $player->player_code }}&flag='+flag,function(res){
 		if(res == 1)
 			layer.msg('正在执行,请稍侯~');
 		else

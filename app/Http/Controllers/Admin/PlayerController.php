@@ -12,7 +12,7 @@ class PlayerController extends AdminController
 {
     public function __construct(){
         parent::__construct();
-        DB::connection()->enableQueryLog();
+        // DB::connection()->enableQueryLog();
         // DB::getQueryLog()
     }
     /**
@@ -137,5 +137,27 @@ class PlayerController extends AdminController
             }
         }
         
+    }
+
+    public function player_play_ctrl(){
+        $player_code = isset($_GET['player_code']) && !empty($_GET['player_code']) ? $_GET['player_code'] : '';
+        $flag  = isset($_GET['flag']) && !empty($_GET['flag']) ? $_GET['flag'] : '';
+        if(!$player_code){
+            mylog('no player code');
+            echo -1;
+        }else{
+            if($flag == -1)
+                $cmd = '"playlist-prev"';
+            else
+                $cmd = '"playlist-next"';
+            $data = ['type'=>'exe_cmd','cmd'=>$cmd,'create_time'=>time(),'player_code'=>$player_code];
+            $id = DB::table('cmdlists')->insertGetId($data);
+            mylog('return id:'.$id);
+            if($id){
+                echo 1;
+            }else{
+                echo 0;
+            }
+        }
     }
 }

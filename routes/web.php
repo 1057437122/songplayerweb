@@ -36,4 +36,5 @@ Route::group(['prefix'=>$background,'namespace'=>'Admin','middleware'=>['auth','
 	// Route::resource('permission','PermissionController');
 	Route::resource('player','PlayerController');
 	Route::get('player_play','PlayerController@player_play');
+	Route::get('player_play_ctrl','PlayerController@player_play_ctrl');
 });
